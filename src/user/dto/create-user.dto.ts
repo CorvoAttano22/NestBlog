@@ -1,3 +1,8 @@
+import { IsEmail, Validate } from 'class-validator';
+import { UniqueEmail } from '../validator/unique-email.validator';
+
 export class CreateUser {
-    email: string
+  @IsEmail({}, { message: 'Invalid Email!' })
+  @Validate(UniqueEmail)
+  email: string;
 }

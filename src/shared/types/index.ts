@@ -5,3 +5,8 @@ export class GenericResponse {
     this.message = message;
   }
 }
+
+export enum Operation {
+  register = 'register',
+  login = 'login',
+}

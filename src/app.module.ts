@@ -4,6 +4,7 @@ import { UserModule } from './user/user.module';
 import { EmailModule } from './email/email.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModuleOptions } from './config/database.configuration';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { DatabaseModuleOptions } from './config/database.configuration';
       envFilePath: process.env.NODE_ENV === 'development' ? '.dev.env' : '.env',
       isGlobal: true,
     }),
+    AuthModule,
   ],
   controllers: [],
   providers: [],

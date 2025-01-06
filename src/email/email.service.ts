@@ -36,4 +36,22 @@ export class EmailService {
         `,
     });
   }
+  async sendLoginEmail(email: string, token: string): Promise<void> {
+    if (process.env.NODE_ENV === 'development') {
+      console.log(
+        `${this.configService.get<string>('CLIENT_HOST')}/callback?token=${token}&operation=login`,
+      );
+    }
+    await this.transport.sendMail({
+      from: 'info@my-app.com',
+      to: email,
+      subject: 'You back already?',
+      html: `
+        <span>click the link below to reach the stairs</span>
+        <div>
+        <a href="${this.configService.get<string>('CLIENT_HOST')}/callback?token=${token}&operation=login"> Sign In to My App </a>
+         </div>
+        `,
+    });
+  }
 }
