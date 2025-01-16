@@ -1,3 +1,4 @@
+import { Article } from 'src/article/article.entity';
 import { Token } from 'src/auth/token.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -26,4 +27,7 @@ export class User {
 
   @OneToMany(() => Token, (token) => token.user)
   tokens: Token[];
+
+  @OneToMany(() => Token, (article) => article.user)
+  articles: Article[];
 }
