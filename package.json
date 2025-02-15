@@ -21,7 +21,8 @@
     "migration:run": "npm run typeorm migration:run -- -d ./database/config.ts",
     "migration:revert": "npm run typeorm migration:revert -- -d ./database/config.ts",
     "migration:run:dev": "cross-env NODE_ENV=development npm run typeorm migration:run -- -d ./database/config.ts",
-    "migration:revert:dev": "cross-env NODE_ENV=development npm run typeorm migration:revert -- -d ./database/config.ts"
+    "migration:revert:dev": "cross-env NODE_ENV=development npm run typeorm migration:revert -- -d ./database/config.ts",
+    "seed": "cross-env NODE_ENV=development ts-node ./database/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -35,6 +36,7 @@
     "class-validator": "^0.14.1",
     "cookie-parser": "^1.4.7",
     "cross-env": "^7.0.3",
+    "lorem-ipsum": "^2.0.8",
     "nodemailer": "^6.9.16",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
