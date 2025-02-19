@@ -7,11 +7,14 @@ import {
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { EmailModule } from './email/email.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseModuleOptions } from './config/database.configuration';
 import { AuthModule } from './auth/auth.module';
 import { ArticleModule } from './article/article.module';
 import { PaginationMiddleware } from './shared/pagination/pagination.middleware';
+import { FileModule } from './file/file.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -24,6 +27,19 @@ import { PaginationMiddleware } from './shared/pagination/pagination.middleware'
     }),
     AuthModule,
     ArticleModule,
+    FileModule,
+    ServeStaticModule.forRootAsync({
+      useFactory: (configService: ConfigService) => {
+        const uploadFolder = configService.get<string>('UPLOAD_FOLDER');
+        return [
+          {
+            rootPath: join(__dirname, '..', '..', uploadFolder),
+            serveRoot: '/api/assets',
+          },
+        ];
+      },
+      inject: [ConfigService],
+    }),
   ],
   controllers: [],
   providers: [],
